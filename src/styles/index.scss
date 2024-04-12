@@ -1,7 +1,7 @@
 :root {
     --background-color: #fff;
     --background-light: #fff;
-    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-color: rgba(0,0,0,02);
     --primary-color: #c71313;
     --text-color: #0A0A0A;
     --text-light: #575757;
@@ -38,10 +38,12 @@ body{
     font-size: 1.2em;
     font-weight: bolder;
     color: var(--primary-color);
-    span{
-        color: var(--text-color);
-    }
+}    
+
+span{
+    color: var(--text-color);
 }
+
 a{
     text-decoration: none;
 }
