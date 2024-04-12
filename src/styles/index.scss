@@ -30,10 +30,6 @@ body{
     align-items: center;
 }
 
-.container{
-    padding-inline: 15vw;
-}
-
 .logo{
     font-size: 1.2em;
     font-weight: bolder;
@@ -65,7 +61,7 @@ a{
             bottom: -5px;
             left: 0;
             transform: scaleX(0);
-            transition: transform calc(var(--animation-speed) * .2s) ease-in-
+            transition: transform calc(var(--animation-speed) * .2s) ease-in-out;
         };
 
         &:hover{
@@ -73,5 +69,39 @@ a{
                 transform: scaleX(1);
             }
         }
+        &:active{
+            color: var(--primary-color);
+            font-weight: bold;
+        }
     }
+    
+    
+}
+
+.sidebar-btn{
+    height: 32px;
+    width: 35px;
+    position: relative;
+    .bar{
+        height: 6px;
+        width: 100%;
+        background-color: var(--text-color);
+        position: absolute;
+        &:nth-child(1){
+            top:  0;
+
+        }
+        &:nth-child(2){
+            top:  50%;
+            transform: translateY(-50%);
+        }
+        &:nth-child(3){
+            top:  100%;
+            transform: translateY(-100%);
+        }
+    }
+}
+
+.container{
+    padding-inline: 15vw;
 }
