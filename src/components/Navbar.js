@@ -1,37 +1,48 @@
 import { useState } from "react"
 import Sidebar from "./Sidebar"
+import { faHome, faList, faCog, icon } from "@fortawesome/free-solid-svg-icons"
 
 export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false)
   const links = [
     {
       name: 'Home',
-      path: '/'
+      path: '/',
+      icon: faHome
     },
     {
       name: 'recipes',
-      path: '/recipes'
+      path: '/recipes',
+      icon: faList
     },
     {
       name: 'settings',
-      path: "/settings"
+      path: "/settings",
+      icon: faCog
     }
   ]
+
+  function closeSidebar() {
+    setShowSidebar(false);
+  }
   return (
     <><div className="navbar container">
       <a href="#!" className="logo">F<span>oo</span>diesHub</a>
       <div className="nav-links">
-        {links.map(link)} 33333333333 start from here mittro
+        {links.map(link => (
+          <a href="#!" key={link.name}>{link.name}</a>
+        ))}
         {/* <a href="#!">Home</a>
         <a href="#!">Recipes</a>
         <a href="#!">Settings</a> */}
       </div>
-      <div onClick={() => setShowSidebar(!showSidebar)} className={showSidebar ? "sidebar-btn active" : "sidebar-btn"}>
+      <div onClick={() => setShowSidebar(true)} className={showSidebar ? "sidebar-btn active" : "sidebar-btn"}>
         <div className="bar"></div>
         <div className="bar"></div>
         <div className="bar"></div>
       </div>
     </div>
-      <Sidebar /></>
+      {showSidebar && <Sidebar close={closeSidebar} links={links} />}
+    </>
   )
 } 
