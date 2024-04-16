@@ -1,23 +1,25 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import React, { useEffect, useState } from 'react';
 
-export default function PreviousSearches() {
-    const searches = ['pizza', 'burger', 'cookies', 'juice', 'biriyani', 'salad', 'ice cream', 'lasagna', 'pudding', 'soup']
+function PreviousSearches() {
+    const [searches, setSearches] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/searches')
+            .then(response => response.json())
+            .then(data => setSearches(data))
+            .catch(error => console.error('Error:', error));
+    }, []);
 
     return (
-        <div className="previous-searches section">
+        <div>
             <h2>Previous Searches</h2>
-            <div className="previous-searches-container">
-                {searches.map((search, index) => (<div key={index} style={{ animationDelay: index * .1 + "s" }} className="search-item">
-                    {search}
-                </div>))}
-            </div>
-            <div className="search-box">
-                <input type="text" placeholder="Search ..." />
-                <button className="btn">
-                    <FontAwesomeIcon icon={faSearch} />
-                </button>
-            </div>
+            <ul>
+                {searches.map((search, index) => (
+                    <li key={index}>{search.term}</li>
+                ))}
+            </ul>
         </div>
-    )
+    );
 }
+
+export default PreviousSearches;
