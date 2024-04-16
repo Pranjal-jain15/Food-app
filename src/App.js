@@ -7,8 +7,9 @@ import {
 import Navbar from "./components/Navbar"
 import Home from './pages/Home'
 import Footer from "./components/Footer";
-import Recipes from "./pages/Recipes";
+import recipes from "./pages/Recipes";
 import Settings from "./pages/Settings";
+import Recipes from "./pages/Recipes";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <div className="container main">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/Recipes" element={<Recipes />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
