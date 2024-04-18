@@ -1,38 +1,59 @@
-import React, { useState } from 'react';
-import PreviousSearches from "../components/PreviousSearches";
-import RecipeCard from "../components/RecipeCard";
+import React, { useState, useEffect } from 'react';
+import RecipeCard from '../components/RecipeCard';
+import RecipeForm from '../components/RecipeForm';
 
-// import CommentsSection from '../components/CommentsSection';
+const Recipes = () => {
+    const [recipes, setRecipes] = useState(() => {
+        // Get the recipes from local storage on initial load
+        const savedRecipes = localStorage.getItem('recipes');
+        return savedRecipes ? JSON.parse(savedRecipes) : [];
+    });
+    const [recipeToEdit, setRecipeToEdit] = useState(null);
 
-export default function Recipes() {
-    const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+    // Use useEffect to update local storage when recipes change
+    useEffect(() => {
+        // Save the recipes to local storage
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+    }, [recipes]);
 
-    const recipes = [
-        { id: "1", title: "Chicken Pan Pizza", image: "/img/gallery/img_1.jpg", authorImg: "/img/top-chefs/img_1.jpg" },
-        { id: "2", title: "Spaghetti and Meatballs", image: "/img/gallery/img_4.jpg", authorImg: "/img/top-chefs/img_2.jpg" },
-        { id: "3", title: "American Cheese Burger", image: "/img/gallery/img_5.jpg", authorImg: "/img/top-chefs/img_3.jpg" },
-        { id: "4", title: "Mutton Biriyani", image: "/img/gallery/img_6.jpg", authorImg: "/img/top-chefs/img_5.jpg" },
-        { id: "5", title: "Japanese Sushi", image: "/img/gallery/img_10.jpg", authorImg: "/img/top-chefs/img_6.jpg" }
-    ].sort(() => Math.random() - 0.5);
+    const addRecipe = newRecipe => {
+        const updatedRecipes = [...recipes, { ...newRecipe, id: Date.now() }];
+        setRecipes(updatedRecipes);
+    };
 
-    const handleRecipeClick = (id) => {
-        console.log("Recipe selected with ID:", id); // Debugging log
-        setSelectedRecipeId(id);
+    const editRecipe = updatedRecipe => {
+        const updatedRecipes = recipes.map(recipe =>
+            recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+        );
+        setRecipes(updatedRecipes);
+        setRecipeToEdit(null);
+    };
+
+    const deleteRecipe = id => {
+        const updatedRecipes = recipes.filter(recipe => recipe.id !== id);
+        setRecipes(updatedRecipes);
     };
 
     return (
-        <div>
-            <PreviousSearches />
+        <div className="container">
+            <RecipeForm
+                addRecipe={addRecipe}
+                editRecipe={editRecipe}
+                recipeToEdit={recipeToEdit}
+                setRecipeToEdit={setRecipeToEdit}
+            />
             <div className="recipes-container">
-                {recipes.map((recipe, index) => (
-                    <div key={recipe.id} onClick={() => handleRecipeClick(recipe.id)}>
-                        <RecipeCard recipe={recipe} />
-                        {/* {selectedRecipeId === recipe.id && (
-                            // <CommentsSection recipeId={recipe.id} />
-                        )} */}
-                    </div>
+                {recipes.map(recipe => (
+                    <RecipeCard
+                        key={recipe.id}
+                        recipe={recipe}
+                        onEdit={() => setRecipeToEdit(recipe)}
+                        onDelete={() => deleteRecipe(recipe.id)}
+                    />
                 ))}
             </div>
         </div>
     );
-}
+};
+
+export default Recipes;

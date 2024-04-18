@@ -1,6 +1,6 @@
 // /src/components/RecipeComponent.js
 import React, { useEffect, useState } from 'react';
-
+import '../styles/recipeform.scss'
 function RecipeComponent() {
     const [recipes, setRecipes] = useState([]);
 

@@ -15,7 +15,7 @@
   .custom-image {
     z-index: -1;
   }
-  .author-img {
+  .auther-img {
     height: 60px;
     width: 60px;
     border-radius: 50%;
@@ -42,39 +42,5 @@
     color: var(--primary-color);
     margin-top: 0.75em;
     display: inline-block;
-  }
-}
-
-.comments-section {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: var(--background-light); // Example variable
-
-  .comment {
-    padding: 10px;
-    margin-top: 5px;
-    background-color: #f0f0f0; // Placeholder color
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    font-size: 0.9em;
-    color: var(--text-color); // Example variable
-  }
-
-  textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--border-color); // Example variable
-    border-radius: 4px;
-    background-color: var(--input-background); // Example variable
-    color: var(--text-color); // Example variable
-  }
-
-  button {
-    padding: 10px 15px;
-    background-color: var(--primary-color); // Example variable
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
   }
 }
